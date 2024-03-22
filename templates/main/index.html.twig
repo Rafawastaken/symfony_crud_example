@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	Crud Application in Symfony
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		{% for message in app.flashes('notice') %}
+			<div class="alert alert-success">
+				{{message}}
+			</div>
+		{% endfor %}
+
+		<div class="d-flex flex-row justify-content-between align-items-center my-3">
+			<div class="col-8">
+				<div class="display-6 ">List Items</div>
+			</div>
+			<div class="col-2">
+				<a href="{{path('create')}}" class="btn btn-primary form-control">Add New</a>
+			</div>
+		</div>
+		<table class="table table-bordered table-striped table-primary text-center">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>Title</th>
+					<th>Content</th>
+					<th>Edit</th>
+					<th>Delete</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				{% for d in data %}
+					<tr>
+						<td>{{d.id}}</td>
+						<td>{{d.title}}</td>
+						<td>{{d.content}}</td>
+						<td>
+							<a href="{{ path('update', {'id': d.id}) }}" class="btn btn-info">Edit</a>
+
+						</td>
+						<td>
+							<a href="{{ path('delete', {'id':d.id}) }}" class="btn btn-danger">Delete</a>
+						</td>
+					</tr>
+				{% endfor %}
+
+			</tbody>
+		</table>
+	</div>
+{% endblock %}
